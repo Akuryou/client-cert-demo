@@ -1,5 +1,8 @@
+import ssl
+
 import tornado.ioloop
 import tornado.web
+from tornado.httpserver import HTTPServer
 
 
 class MainHandler(tornado.web.RequestHandler):
@@ -11,5 +14,14 @@ application = tornado.web.Application([
 ])
 
 if __name__ == "__main__":
-    application.listen(8888)
+    ssl_ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+    ssl_ctx.load_cert_chain("../keys/server.crt", "../keys/server.key")
+
+    server = HTTPServer(
+        application,
+        ssl_options=ssl_ctx
+    )
+    server.listen(8888)
+
+    print("server running, go to https://localhost:8888")
     tornado.ioloop.IOLoop.current().start()
