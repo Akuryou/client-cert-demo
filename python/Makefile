@@ -10,6 +10,10 @@ virtualenv:
 requirements:
 	$(PIP_BINARY) install -r requirements.txt --upgrade
 
+server: virtualenv requirements
+	$(PYTHON_BINARY) server.py
+
+
 .PHONY: clean
 clean:
 	rm -rf env
