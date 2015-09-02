@@ -58,3 +58,6 @@ target/
 
 *.swp
 .ropeproject
+*.crt
+*.key
+*.csr
