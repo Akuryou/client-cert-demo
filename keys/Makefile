@@ -11,4 +11,4 @@ server.crt:
 
 .PHONY: clean
 clean:
-	rm *
+	rm server.*
